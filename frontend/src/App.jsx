@@ -13,7 +13,7 @@ import About from "./pages/about/About";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/portfolio">
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
