@@ -1,0 +1,398 @@
+/* =====================================================
+   ABOUT PAGE
+===================================================== */
+
+.about-page {
+  min-height: 100vh;
+
+  padding: 70px 0 160px;
+
+  color: #f5f5f5;
+
+  overflow: hidden;
+}
+
+/* =====================================================
+   ABOUT HERO PHOTO
+===================================================== */
+
+.about-hero {
+  width: min(1100px, 88%);
+
+  margin: 0 auto 70px;
+}
+
+.about-photo-wrapper {
+  width: 100%;
+
+  overflow: hidden;
+
+  border-radius: 2px;
+
+  background: rgba(255, 255, 255, 0.03);
+
+  box-shadow:
+    0 0 30px rgba(255, 255, 255, 0.025),
+    0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.about-photo {
+  width: 100%;
+
+  height: auto;
+
+  display: block;
+
+  object-fit: cover;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+
+  pointer-events: none;
+}
+
+/* =====================================================
+   ABOUT CONTENT
+===================================================== */
+
+.about-content {
+  width: min(1100px, 88%);
+
+  margin: 0 auto;
+  margin-bottom: 200px;
+
+  display: flex;
+
+  justify-content: flex-start;
+}
+
+.about-text-section {
+  max-width: 800px;
+}
+
+/* =====================================================
+   ABOUT TITLE
+===================================================== */
+
+.about-text-section h1,
+.certificates-header h1 {
+  margin: 0 0 38px;
+
+  font-size: clamp(2.5rem, 5vw, 4rem);
+
+  line-height: 1;
+
+  font-weight: 800;
+
+  letter-spacing: -0.04em;
+
+  color: #ffffff;
+}
+
+/* =====================================================
+   ABOUT TEXT
+===================================================== */
+
+.about-text-section p {
+  margin: 0 0 8px;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 1rem;
+
+  line-height: 1.5;
+
+  letter-spacing: 0.01em;
+
+  text-align: justify;
+}
+
+.about-text-section p:last-child {
+  margin-bottom: 0;
+}
+
+/* =====================================================
+   CERTIFICATES SECTION
+===================================================== */
+
+.certificates-section {
+  width: min(1100px, 88%);
+
+  margin: 130px auto 0;
+  margin-bottom: 100px;
+}
+
+/* =====================================================
+   CERTIFICATE HEADER
+===================================================== */
+
+.certificates-header {
+  margin-bottom: 50px;
+}
+
+.certificates-header h1 {
+  margin-bottom: 0;
+}
+
+/* =====================================================
+   CERTIFICATE GRID
+===================================================== */
+
+.certificates-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 28px;
+
+  align-items: start;
+}
+
+/* =====================================================
+   CERTIFICATE ITEM
+===================================================== */
+
+.certificate-item {
+  position: relative;
+
+  min-width: 0;
+
+  text-align: center;
+
+  user-select: none;
+
+  -webkit-user-select: none;
+
+  -moz-user-select: none;
+
+  -ms-user-select: none;
+
+  -webkit-touch-callout: none;
+
+  cursor: default;
+}
+
+/* =====================================================
+   CERTIFICATE IMAGE CONTAINER
+===================================================== */
+
+.certificate-image-wrapper {
+  position: relative;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 2px;
+
+  padding: 3px;
+
+  transition:
+    transform 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+/* Small glass/glow effect */
+
+.certificate-image-wrapper::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    transparent 35%,
+    transparent 70%,
+    rgba(255, 255, 255, 0.03)
+  );
+
+  opacity: 0;
+
+  transition: opacity 0.4s ease;
+}
+
+/* =====================================================
+   CERTIFICATE HOVER
+===================================================== */
+
+.certificate-item:hover .certificate-image-wrapper {
+  transform: translateY(-5px);
+
+  border-color: rgba(255, 255, 255, 0.25);
+
+  box-shadow:
+    0 0 20px rgba(255, 255, 255, 0.05),
+    0 15px 35px rgba(0, 0, 0, 0.35);
+}
+
+.certificate-item:hover .certificate-image-wrapper::after {
+  opacity: 1;
+}
+
+/* =====================================================
+   CERTIFICATE IMAGE
+===================================================== */
+
+.certificate-image {
+  width: 100%;
+
+  height: auto;
+
+  display: block;
+
+  object-fit: contain;
+
+  user-select: none;
+
+  -webkit-user-select: none;
+
+  -webkit-user-drag: none;
+
+  -moz-user-select: none;
+
+  pointer-events: none;
+}
+
+/* =====================================================
+   CERTIFICATE TITLE
+===================================================== */
+
+.certificate-item p {
+  margin: 12px 0 0;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: 0.78rem;
+
+  line-height: 1.4;
+
+  user-select: none;
+
+  -webkit-user-select: none;
+}
+
+/* =====================================================
+   AOS
+===================================================== */
+
+[data-aos] {
+  will-change: transform, opacity;
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+  .about-page {
+    padding-top: 55px;
+  }
+
+  .about-hero {
+    width: 90%;
+
+    margin-bottom: 60px;
+  }
+
+  .about-content {
+    width: 90%;
+  }
+
+  .certificates-section {
+    width: 90%;
+
+    margin-top: 100px;
+  }
+
+  .certificates-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 35px 25px;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+  .about-page {
+    padding: 40px 0 100px;
+  }
+
+  .about-hero {
+    width: 92%;
+
+    margin-bottom: 55px;
+  }
+
+  .about-content {
+    width: 92%;
+  }
+
+  .about-text-section h1,
+  .certificates-header h1 {
+    font-size: 2.5rem;
+
+    margin-bottom: 30px;
+  }
+
+  .about-text-section p {
+    font-size: 0.9rem;
+
+    line-height: 1.6;
+
+    text-align: left;
+  }
+
+  .certificates-section {
+    width: 92%;
+
+    margin-top: 90px;
+  }
+
+  .certificates-header {
+    margin-bottom: 35px;
+  }
+
+  .certificates-grid {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 25px 15px;
+  }
+
+  .certificate-item p {
+    font-size: 0.68rem;
+
+    line-height: 1.35;
+  }
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 420px) {
+  .certificates-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .certificate-item {
+    width: 80%;
+
+    margin: 0 auto;
+  }
+
+  .certificate-item p {
+    font-size: 0.75rem;
+  }
+}

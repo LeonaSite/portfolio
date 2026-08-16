@@ -1,0 +1,822 @@
+.project-page {
+  min-height: 100vh;
+
+  background: none;
+
+  color: #f5f5f5;
+
+  padding: 120px 0 180px;
+
+  overflow: hidden;
+}
+
+/* =====================================================
+   BLUR TEXT PROJECT TITLE
+===================================================== */
+
+.project-title-blur {
+  margin: 0;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  font-size: clamp(3rem, 7vw, 6rem);
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+
+  text-align: center;
+}
+
+.project-title-blur .blur-text-word {
+  display: inline-block;
+
+  will-change: transform, filter, opacity;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.project-header {
+  width: min(1100px, 88%);
+
+  margin: 0 auto 100px;
+
+  text-align: center;
+}
+
+.project-header h1 {
+  margin: 0;
+
+  font-size: clamp(3rem, 7vw, 6rem);
+
+  font-weight: 800;
+
+  letter-spacing: -0.05em;
+
+  color: #ffffff;
+}
+
+.project-header p {
+  max-width: 650px;
+
+  margin: 25px auto 0;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 1rem;
+
+  line-height: 1.7;
+}
+
+/* =====================================================
+   TIMELINE
+===================================================== */
+
+.project-timeline {
+  position: relative;
+
+  width: min(1100px, 88%);
+
+  margin: 0 auto;
+
+  padding-bottom: 50px;
+}
+
+/* =====================================================
+   TIMELINE LINE
+===================================================== */
+
+.timeline-line {
+  position: absolute;
+
+  left: 0;
+
+  top: 45px;
+
+  bottom: 50px;
+
+  width: 4px;
+
+  overflow: hidden;
+
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.8) 0px,
+    rgba(255, 255, 255, 0.8) 10px,
+    transparent 10px,
+    transparent 17px
+  );
+
+  border-radius: 10px;
+
+  transform: translateX(-50%);
+}
+
+/*
+  Moving glow over the timeline
+*/
+
+.timeline-line-progress {
+  position: absolute;
+
+  top: -100%;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.9),
+    transparent
+  );
+
+  filter: blur(2px);
+
+  animation: timelineFlow 4s linear infinite;
+}
+
+@keyframes timelineFlow {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+/* =====================================================
+   TIMELINE ITEM
+===================================================== */
+
+.project-timeline-item {
+  position: relative;
+
+  min-height: 325px;
+
+  margin-bottom: 80px;
+
+  display: flex;
+
+  align-items: center;
+
+  padding-left: 80px;
+
+  margin-left: -20px;
+
+  /*
+    Keep the card above the timeline node.
+  */
+  isolation: isolate;
+}
+
+.project-timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* =====================================================
+   TIMELINE NODE
+===================================================== */
+
+.timeline-node {
+  position: absolute;
+
+  left: 0;
+  top: 50%;
+
+  width: 40px;
+  height: 40px;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: #eeeeee;
+
+  border: 5px solid #0d0d0d;
+
+  /*
+    Node stays BELOW the project card.
+  */
+  z-index: 1;
+
+  /*
+    Soft glow
+  */
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.15),
+    0 0 18px rgba(255, 255, 255, 0.25),
+    0 0 35px rgba(255, 255, 255, 0.08);
+
+  transition:
+    box-shadow 0.4s ease,
+    transform 0.4s ease;
+}
+
+.timeline-node:hover {
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.25),
+    0 0 25px rgba(255, 255, 255, 0.4),
+    0 0 50px rgba(255, 255, 255, 0.12);
+}
+
+/*
+  Horizontal connector from timeline
+*/
+
+.timeline-node::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 100%;
+
+  width: 82px;
+  height: 3px;
+
+  transform: translateY(-50%);
+
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.8) 0px,
+    rgba(255, 255, 255, 0.8) 9px,
+    transparent 9px,
+    transparent 15px
+  );
+
+  border-radius: 10px;
+  z-index: -1;
+}
+
+/* =====================================================
+   PROJECT CARD
+===================================================== */
+
+.project-card {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  min-height: 325px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.075),
+    rgba(255, 255, 255, 0.025)
+  );
+
+  border: 2px solid rgba(255, 255, 255, 0.16);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02),
+    0 0 20px rgba(255, 255, 255, 0.025);
+
+  transition:
+    transform 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    background 0.4s ease;
+}
+
+/* =====================================================
+   CARD HOVER
+===================================================== */
+
+.project-card:hover {
+  transform: translateY(-6px);
+
+  border-color: rgba(255, 255, 255, 0.3);
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.095),
+    rgba(255, 255, 255, 0.035)
+  );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 25px rgba(255, 255, 255, 0.055),
+    0 0 60px rgba(255, 255, 255, 0.025),
+    0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* =====================================================
+   INFORMATION
+===================================================== */
+
+.project-information {
+  padding: 30px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  min-width: 0;
+}
+
+/* =====================================================
+   PROJECT TITLE
+===================================================== */
+
+.project-title-row {
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.project-title-row h2 {
+  margin: 0;
+
+  color: #f7f7f7;
+
+  font-size: 1.25rem;
+
+  line-height: 1.3;
+
+  font-weight: 700;
+}
+
+.project-title-row span {
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 0.75rem;
+
+  white-space: nowrap;
+}
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.project-description {
+  margin: 0;
+
+  padding-left: 18px;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: 0.78rem;
+
+  line-height: 1.4;
+}
+
+.project-description li {
+  margin-bottom: 10px;
+
+  padding-left: 3px;
+}
+
+.project-description li:last-child {
+  margin-bottom: 0;
+}
+
+/* =====================================================
+   TECHNOLOGIES
+===================================================== */
+
+.project-technologies {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  width: fit-content;
+
+  margin-top: 18px;
+
+  padding: 7px 13px;
+
+  border-radius: 30px;
+
+  background: rgba(255, 255, 255, 0.035);
+
+  border: 2px solid rgba(255, 255, 255, 0.12);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 12px rgba(255, 255, 255, 0.025);
+}
+
+.project-tech {
+  width: 34px;
+
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.project-tech img {
+  width: auto;
+
+  max-width: 34px;
+
+  max-height: 32px;
+
+  object-fit: contain;
+
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+.project-tech:hover img {
+  transform: scale(1.15);
+
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.35));
+}
+
+/* =====================================================
+   TECHNOLOGY TOOLTIP
+===================================================== */
+
+.project-tech {
+  position: relative;
+}
+
+/* Tooltip */
+.technology-tooltip {
+  position: absolute;
+
+  bottom: calc(100% + 10px);
+  left: 50%;
+
+  transform: translateX(-50%) translateY(5px);
+
+  padding: 6px 10px;
+
+  background: rgba(15, 15, 15, 0.9);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius: 6px;
+
+  color: #ffffff;
+
+  font-size: 0.7rem;
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.35),
+    0 0 12px rgba(255, 255, 255, 0.04);
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s ease;
+
+  z-index: 20;
+}
+
+/* Small arrow */
+.technology-tooltip::after {
+  content: "";
+
+  position: absolute;
+
+  top: 100%;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid rgba(15, 15, 15, 0.9);
+}
+
+/* Show tooltip */
+.project-tech:hover .technology-tooltip {
+  opacity: 1;
+
+  visibility: visible;
+
+  transform: translateX(-50%) translateY(0);
+}
+
+/* =====================================================
+   PROJECT IMAGE
+===================================================== */
+
+.project-image-container {
+  position: relative;
+
+  min-width: 0;
+
+  padding: 14px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.16);
+
+  overflow: hidden;
+}
+
+.project-image-container::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04),
+    transparent 45%,
+    rgba(0, 0, 0, 0.1)
+  );
+}
+
+.project-image-container img {
+  position: relative;
+
+  z-index: 1;
+
+  width: 100%;
+
+  max-height: 270px;
+
+  object-fit: contain;
+
+  border-radius: 6px;
+
+  display: block;
+
+  transition:
+    transform 0.5s ease,
+    filter 0.5s ease;
+}
+
+.project-card:hover .project-image-container img {
+  transform: scale(1.025);
+
+  filter: brightness(1.05);
+}
+
+/* =====================================================
+   IMAGE LABEL
+===================================================== */
+
+.project-image-label {
+  position: relative;
+
+  z-index: 2;
+
+  align-self: flex-end;
+
+  margin-top: 8px;
+
+  padding-right: 3px;
+
+  color: rgba(255, 255, 255, 0.65);
+
+  font-size: 0.65rem;
+}
+
+/* =====================================================
+   AOS
+===================================================== */
+
+[data-aos] {
+  will-change: transform, opacity;
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+  .project-page {
+    padding-top: 80px;
+  }
+
+  .project-timeline {
+    width: 90%;
+  }
+
+  .project-timeline-item {
+    padding-left: 60px;
+  }
+
+  .timeline-node::after {
+    width: 62px;
+  }
+
+  .project-information {
+    padding: 22px;
+  }
+
+  .project-title-row h2 {
+    font-size: 1.05rem;
+  }
+
+  .project-description {
+    font-size: 0.72rem;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+  .project-page {
+    padding: 70px 0 100px;
+  }
+
+  .project-header {
+    width: 88%;
+
+    margin-bottom: 70px;
+  }
+
+  .project-header h1 {
+    font-size: 3rem;
+  }
+
+  .project-header p {
+    font-size: 0.85rem;
+  }
+
+  /*
+    Move timeline closer to left
+  */
+
+  .project-timeline {
+    width: 92%;
+
+    margin-left: 8%;
+  }
+
+  .timeline-line {
+    left: 0;
+  }
+
+  .project-timeline-item {
+    padding-left: 45px;
+
+    min-height: auto;
+
+    margin-bottom: 45px;
+
+    margin-left: -10px;
+  }
+
+  .timeline-node {
+    width: 28px;
+    height: 28px;
+
+    border-width: 4px;
+  }
+
+  .timeline-node::after {
+    width: 45px;
+  }
+
+  /*
+    One column card
+  */
+
+  .project-card {
+    grid-template-columns: 1fr;
+
+    min-height: auto;
+  }
+
+  /*
+    Put image first on mobile
+  */
+
+  .project-image-container {
+    order: -1;
+
+    min-height: 190px;
+
+    padding: 12px;
+  }
+
+  .project-image-container img {
+    max-height: 190px;
+  }
+
+  .project-information {
+    padding: 22px;
+  }
+
+  .project-title-row {
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 15px;
+  }
+
+  .project-title-row h2 {
+    font-size: 1rem;
+  }
+
+  .project-description {
+    font-size: 0.76rem;
+
+    line-height: 1.5;
+  }
+
+  .project-technologies {
+    margin-top: 20px;
+  }
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 450px) {
+  .project-timeline {
+    width: 94%;
+
+    margin-left: 6%;
+  }
+
+  .project-timeline-item {
+    padding-left: 35px;
+  }
+
+  .timeline-node {
+    width: 23px;
+    height: 23px;
+  }
+
+  .timeline-node::after {
+    width: 35px;
+  }
+
+  .project-information {
+    padding: 18px;
+  }
+
+  .project-description {
+    padding-left: 16px;
+
+    font-size: 0.72rem;
+  }
+}
