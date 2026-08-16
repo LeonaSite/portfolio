@@ -15,12 +15,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={<Navigate to="/portfolio/dashboard" replace />}
-        />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-        <Route path="/portfolio" element={<Navigation />}>
+        <Route path="/" element={<Navigation />}>
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="projects" element={<Projects />} />

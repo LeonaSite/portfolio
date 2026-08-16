@@ -70,7 +70,7 @@ export default function Navigation() {
         <div className={`nav-right ${isMenuOpen ? "open" : ""}`} ref={menuRef}>
           <div className="nav-links">
             <NavLink
-              to="/portfolio/dashboard"
+              to="/dashboard"
               className={({ isActive }) => (isActive ? "active" : "")}
               onClick={() => setIsMenuOpen(false)}
             >
@@ -79,7 +79,7 @@ export default function Navigation() {
             </NavLink>
 
             <NavLink
-              to="/portfolio/projects"
+              to="/projects"
               className={({ isActive }) => (isActive ? "active" : "")}
               onClick={() => setIsMenuOpen(false)}
             >
@@ -88,7 +88,7 @@ export default function Navigation() {
             </NavLink>
 
             <NavLink
-              to="/portfolio/about"
+              to="/about"
               className={({ isActive }) => (isActive ? "active" : "")}
               onClick={() => setIsMenuOpen(false)}
             >
