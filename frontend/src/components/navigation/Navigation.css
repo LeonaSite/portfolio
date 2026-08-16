@@ -167,6 +167,7 @@
 
   .page-content {
     padding: 20px;
+    animation: none;
   }
 }
 
@@ -186,5 +187,6 @@
 
   .page-content {
     padding: 15px;
+    animation: none;
   }
 }
