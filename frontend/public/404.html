@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Portfolio</title>
+
+    <script>
+      const path = window.location.pathname;
+      const base = "/portfolio";
+
+      if (path.startsWith(base)) {
+        const route = path.slice(base.length);
+
+        sessionStorage.setItem(
+          "redirect",
+          route + window.location.search + window.location.hash,
+        );
+
+        window.location.replace(base + "/");
+      }
+    </script>
+  </head>
+
+  <body>
+    <p>Loading...</p>
+  </body>
+</html>

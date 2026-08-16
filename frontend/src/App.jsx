@@ -1,10 +1,5 @@
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Navigation from "./components/navigation/Navigation";
 import Dashboard from "./pages/dashboard/Dashboard";
@@ -15,10 +10,8 @@ function App() {
   return (
     <Router basename="/portfolio">
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-
         <Route path="/" element={<Navigation />}>
-          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route index element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="projects" element={<Projects />} />
           <Route path="about" element={<About />} />
