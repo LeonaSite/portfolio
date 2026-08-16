@@ -99,13 +99,9 @@
 
 .timeline-line {
   position: absolute;
-
   left: 0;
-
   top: 45px;
-
   bottom: 50px;
-
   width: 4px;
 
   overflow: hidden;
@@ -121,6 +117,11 @@
   border-radius: 10px;
 
   transform: translateX(-50%);
+
+  /* Always stay behind nodes and cards */
+  z-index: 0;
+
+  pointer-events: none;
 }
 
 /*
@@ -168,20 +169,17 @@
   position: relative;
 
   min-height: 325px;
-
   margin-bottom: 80px;
 
   display: flex;
-
   align-items: center;
 
   padding-left: 80px;
-
   margin-left: -20px;
 
-  /*
-    Keep the card above the timeline node.
-  */
+  /* Put the entire project item above the timeline */
+  z-index: 1;
+
   isolation: isolate;
 }
 
@@ -213,7 +211,7 @@
   /*
     Node stays BELOW the project card.
   */
-  z-index: 1;
+  z-index: 2;
 
   /*
     Soft glow
@@ -261,7 +259,7 @@
   );
 
   border-radius: 10px;
-  z-index: -1;
+  z-index: 1;
 }
 
 /* =====================================================
@@ -271,7 +269,7 @@
 .project-card {
   position: relative;
 
-  z-index: 2;
+  z-index: 10;
 
   width: 100%;
 
