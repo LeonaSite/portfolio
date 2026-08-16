@@ -5,10 +5,20 @@
     <link rel="icon" type="image/svg+xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio</title>
-    <script type="module" crossorigin src="/portfolio/assets/index-DVTjP6uo.js"></script>
+    <script type="module" crossorigin src="/portfolio/assets/index-D51mWWCx.js"></script>
     <link rel="stylesheet" crossorigin href="/portfolio/assets/index-C67Je6ka.css">
   </head>
   <body>
     <div id="root"></div>
   </body>
+
+  <script>
+    const redirect = sessionStorage.getItem("redirect");
+
+    if (redirect) {
+      sessionStorage.removeItem("redirect");
+
+      window.history.replaceState(null, null, "/portfolio" + redirect);
+    }
+  </script>
 </html>
