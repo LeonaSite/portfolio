@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import BlurText from "../../components/BlurText/BlurText";
@@ -365,7 +366,7 @@ function ProjectImage({ project }) {
   const images = project.images;
 
   /*
-    Automatic slideshow
+    AUTOMATIC SLIDESHOW
   */
 
   useEffect(() => {
@@ -379,7 +380,25 @@ function ProjectImage({ project }) {
   }, [images.length, isModalOpen]);
 
   /*
-    Close modal with ESC
+    PREVIOUS IMAGE
+  */
+
+  const previousImage = () => {
+    setCurrentIndex(
+      (previous) => (previous - 1 + images.length) % images.length,
+    );
+  };
+
+  /*
+    NEXT IMAGE
+  */
+
+  const nextImage = () => {
+    setCurrentIndex((previous) => (previous + 1) % images.length);
+  };
+
+  /*
+    MODAL KEYBOARD CONTROLS
   */
 
   useEffect(() => {
@@ -401,6 +420,7 @@ function ProjectImage({ project }) {
 
     document.addEventListener("keydown", handleKeyDown);
 
+    // Prevent background scrolling
     document.body.style.overflow = "hidden";
 
     return () => {
@@ -410,30 +430,12 @@ function ProjectImage({ project }) {
     };
   }, [isModalOpen]);
 
-  /*
-    Next image
-  */
-
-  const nextImage = () => {
-    setCurrentIndex((previous) => (previous + 1) % images.length);
-  };
-
-  /*
-    Previous image
-  */
-
-  const previousImage = () => {
-    setCurrentIndex(
-      (previous) => (previous - 1 + images.length) % images.length,
-    );
-  };
-
   const currentImage = images[currentIndex];
 
   return (
     <>
       {/* =====================================================
-          IMAGE SLIDESHOW
+          PROJECT IMAGE
       ===================================================== */}
 
       <div className="project-image-container">
@@ -443,40 +445,44 @@ function ProjectImage({ project }) {
           onClick={() => setIsModalOpen(true)}
           aria-label={`View ${project.title} images`}
         >
-          {/* Image */}
+          {/* SLIDESHOW */}
 
           {images.map((image, index) => (
             <img
               key={image.src}
               src={image.src}
               alt={image.label}
+              draggable="false"
               className={`project-slideshow-image ${
                 index === currentIndex ? "active" : ""
               }`}
             />
           ))}
 
-          {/* Hover overlay */}
+          {/* VIEW OVERLAY */}
 
           <span className="project-view-overlay">
             <span className="project-view-circle">VIEW</span>
           </span>
         </button>
 
-        {/* Image label */}
+        {/* IMAGE LABEL */}
 
         <span className="project-image-label">{currentImage.label}</span>
 
-        {/* Slideshow indicators */}
+        {/* SLIDESHOW INDICATORS */}
 
         {images.length > 1 && (
           <div className="project-slide-indicators">
             {images.map((_, index) => (
-              <span
+              <button
                 key={index}
+                type="button"
+                aria-label={`View image ${index + 1}`}
                 className={`project-slide-dot ${
                   index === currentIndex ? "active" : ""
                 }`}
+                onClick={() => setCurrentIndex(index)}
               />
             ))}
           </div>
@@ -484,73 +490,85 @@ function ProjectImage({ project }) {
       </div>
 
       {/* =====================================================
-          IMAGE MODAL
+          MODAL
+          RENDERED DIRECTLY INTO BODY
       ===================================================== */}
 
-      {isModalOpen && (
-        <div
-          className="project-image-modal"
-          onClick={() => setIsModalOpen(false)}
-        >
+      {isModalOpen &&
+        createPortal(
           <div
-            className="project-modal-content"
-            onClick={(event) => event.stopPropagation()}
+            className="project-image-modal"
+            onClick={() => setIsModalOpen(false)}
           >
-            {/* Close */}
-
-            <button
-              type="button"
-              className="project-modal-close"
-              onClick={() => setIsModalOpen(false)}
-              aria-label="Close image viewer"
+            <div
+              className="project-modal-content"
+              onClick={(event) => event.stopPropagation()}
             >
-              ×
-            </button>
+              {/* CLOSE */}
 
-            {/* Previous */}
+              <button
+                type="button"
+                className="project-modal-close"
+                onClick={() => setIsModalOpen(false)}
+                aria-label="Close image viewer"
+              >
+                ×
+              </button>
 
-            <button
-              type="button"
-              className="project-modal-prev"
-              onClick={previousImage}
-              aria-label="Previous image"
-            >
-              ‹
-            </button>
+              {/* PREVIOUS */}
 
-            {/* Main image */}
+              {images.length > 1 && (
+                <button
+                  type="button"
+                  className="project-modal-prev"
+                  onClick={previousImage}
+                  aria-label="Previous image"
+                >
+                  ‹
+                </button>
+              )}
 
-            <img
-              src={currentImage.src}
-              alt={currentImage.label}
-              className="project-modal-image"
-            />
+              {/* IMAGE VIEWER */}
 
-            {/* Next */}
+              <div className="project-modal-image-wrapper">
+                <img
+                  src={currentImage.src}
+                  alt={currentImage.label}
+                  draggable="false"
+                  className="project-modal-image"
+                />
+              </div>
 
-            <button
-              type="button"
-              className="project-modal-next"
-              onClick={nextImage}
-              aria-label="Next image"
-            >
-              ›
-            </button>
+              {/* NEXT */}
 
-            {/* Modal information */}
+              {images.length > 1 && (
+                <button
+                  type="button"
+                  className="project-modal-next"
+                  onClick={nextImage}
+                  aria-label="Next image"
+                >
+                  ›
+                </button>
+              )}
 
-            <div className="project-modal-info">
-              <span className="project-modal-title">{project.title}</span>
+              {/* MODAL INFORMATION */}
 
-              <span className="project-modal-label">{currentImage.label}</span>
+              <div className="project-modal-info">
+                <span className="project-modal-title">{project.title}</span>
 
-              <span className="project-modal-counter">
-                {currentIndex + 1} / {images.length}
-              </span>
+                <span className="project-modal-label">
+                  {currentImage.label}
+                </span>
+
+                <span className="project-modal-counter">
+                  {currentIndex + 1} / {images.length}
+                </span>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body,
+        )}
     </>
   );
 }
