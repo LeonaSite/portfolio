@@ -549,8 +549,6 @@
 ===================================================== */
 
 .project-image-container {
-  position: relative;
-
   min-width: 0;
 
   padding: 14px;
@@ -568,31 +566,60 @@
   overflow: hidden;
 }
 
-.project-image-container::after {
-  content: "";
+/* Fixed slideshow area */
 
+.project-image-frame {
+  position: relative;
+
+  width: 490px;
+
+  height: 241px;
+
+  max-width: 100%;
+
+  overflow: hidden;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  background: #080808;
+}
+
+/* =====================================================
+   IMAGE BUTTON
+===================================================== */
+
+.project-image-button {
+  position: relative;
+
+  width: 490px;
+  height: 241px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  display: block;
+}
+
+/* =====================================================
+   SLIDESHOW IMAGES
+===================================================== */
+
+.project-slideshow-image {
   position: absolute;
 
   inset: 0;
 
-  pointer-events: none;
-
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.04),
-    transparent 45%,
-    rgba(0, 0, 0, 0.1)
-  );
-}
-
-.project-image-container img {
-  position: relative;
-
-  z-index: 1;
-
   width: 100%;
-
-  max-height: 270px;
+  height: 100%;
 
   object-fit: contain;
 
@@ -600,15 +627,218 @@
 
   display: block;
 
+  opacity: 0;
+
+  transform: scale(1);
+
   transition:
-    transform 0.5s ease,
+    opacity 0.8s ease-in-out,
+    transform 0.6s ease,
     filter 0.5s ease;
+
+  pointer-events: none;
 }
 
-.project-card:hover .project-image-container img {
+/*
+  Active image
+*/
+
+.project-slideshow-image.active {
+  opacity: 1;
+
+  z-index: 2;
+}
+
+/* =====================================================
+   IMAGE HOVER
+===================================================== */
+
+.project-image-button:hover .project-slideshow-image.active {
   transform: scale(1.025);
 
-  filter: brightness(1.05);
+  filter: brightness(0.6);
+}
+
+/* =====================================================
+   IMAGE DARK OVERLAY
+===================================================== */
+
+.project-image-button::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 3;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04),
+    transparent 45%,
+    rgba(0, 0, 0, 0.15)
+  );
+
+  opacity: 0;
+
+  transition: opacity 0.3s ease;
+}
+
+.project-image-button:hover::after {
+  opacity: 1;
+}
+
+/* =====================================================
+   VIEW OVERLAY
+===================================================== */
+
+.project-view-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 5;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  transition: opacity 0.3s ease;
+}
+
+.project-image-button:hover .project-view-overlay {
+  opacity: 1;
+}
+
+/* =====================================================
+   VIEW CIRCLE
+===================================================== */
+
+.project-view-circle {
+  width: 78px;
+  height: 78px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: #ffffff;
+
+  font-size: 0.7rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  background: rgba(20, 20, 20, 0.5);
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+
+  backdrop-filter: blur(8px);
+
+  -webkit-backdrop-filter: blur(8px);
+
+  box-shadow:
+    0 0 20px rgba(255, 255, 255, 0.12),
+    inset 0 0 15px rgba(255, 255, 255, 0.05);
+
+  transform: scale(0.7);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.project-image-button:hover .project-view-circle {
+  transform: scale(1);
+
+  box-shadow:
+    0 0 25px rgba(255, 255, 255, 0.22),
+    inset 0 0 20px rgba(255, 255, 255, 0.08);
+}
+
+/* =====================================================
+   IMAGE LABEL
+===================================================== */
+
+.project-image-label {
+  position: absolute;
+
+  right: 12px;
+  bottom: 8px;
+
+  z-index: 10;
+
+  color: rgba(255, 255, 255, 0.7);
+
+  font-size: 0.65rem;
+
+  pointer-events: none;
+
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* =====================================================
+   SLIDESHOW INDICATORS
+===================================================== */
+
+.project-slide-indicators {
+  position: absolute;
+
+  left: 50%;
+  bottom: 8px;
+
+  z-index: 10;
+
+  transform: translateX(-50%);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 4px 7px;
+
+  border-radius: 20px;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  backdrop-filter: blur(8px);
+
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.project-slide-dot {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.35);
+
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+
+.project-slide-dot.active {
+  width: 14px;
+
+  border-radius: 5px;
+
+  background: rgba(255, 255, 255, 0.9);
 }
 
 /* =====================================================
@@ -627,6 +857,274 @@
   padding-right: 3px;
 
   color: rgba(255, 255, 255, 0.65);
+
+  font-size: 0.65rem;
+}
+
+/* =====================================================
+   IMAGE MODAL
+===================================================== */
+
+.project-image-modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 30px;
+
+  background: rgba(0, 0, 0, 0.88);
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
+
+  animation: projectModalFade 0.25s ease;
+}
+
+@keyframes projectModalFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* =====================================================
+   MODAL CONTENT
+===================================================== */
+
+.project-modal-content {
+  position: relative;
+
+  max-width: min(1200px, 92vw);
+
+  max-height: 90vh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  animation: projectModalZoom 0.3s ease;
+}
+
+@keyframes projectModalZoom {
+  from {
+    opacity: 0;
+
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+/* =====================================================
+   MODAL IMAGE
+===================================================== */
+
+.project-modal-image {
+  display: block;
+
+  max-width: min(1000px, 82vw);
+
+  max-height: 78vh;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 20px 80px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(255, 255, 255, 0.05);
+}
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.project-modal-close {
+  position: absolute;
+
+  top: -50px;
+  right: -5px;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  border-radius: 50%;
+
+  background: rgba(20, 20, 20, 0.65);
+
+  color: #ffffff;
+
+  font-size: 1.8rem;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(8px);
+
+  -webkit-backdrop-filter: blur(8px);
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.project-modal-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+
+  transform: scale(1.08);
+}
+
+/* =====================================================
+   PREVIOUS / NEXT
+===================================================== */
+
+.project-modal-prev,
+.project-modal-next {
+  position: absolute;
+
+  top: 50%;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  transform: translateY(-50%);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  border-radius: 50%;
+
+  background: rgba(20, 20, 20, 0.7);
+
+  color: #ffffff;
+
+  font-size: 2.2rem;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(8px);
+
+  -webkit-backdrop-filter: blur(8px);
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.project-modal-prev {
+  left: -70px;
+}
+
+.project-modal-next {
+  right: -70px;
+}
+
+.project-modal-prev:hover,
+.project-modal-next:hover {
+  background: rgba(255, 255, 255, 0.15);
+
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.12);
+}
+
+.project-modal-prev:hover {
+  transform: translateY(-50%) scale(1.08);
+}
+
+.project-modal-next:hover {
+  transform: translateY(-50%) scale(1.08);
+}
+
+/* =====================================================
+   MODAL INFORMATION
+===================================================== */
+
+.project-modal-info {
+  position: absolute;
+
+  left: 50%;
+  bottom: -48px;
+
+  transform: translateX(-50%);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  width: max-content;
+
+  max-width: 90vw;
+
+  padding: 8px 14px;
+
+  border-radius: 20px;
+
+  background: rgba(15, 15, 15, 0.7);
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  backdrop-filter: blur(10px);
+
+  -webkit-backdrop-filter: blur(10px);
+
+  white-space: nowrap;
+}
+
+.project-modal-title {
+  color: #ffffff;
+
+  font-size: 0.75rem;
+
+  font-weight: 600;
+}
+
+.project-modal-label {
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 0.7rem;
+}
+
+.project-modal-counter {
+  color: rgba(255, 255, 255, 0.4);
 
   font-size: 0.65rem;
 }
@@ -745,14 +1243,6 @@
     Put image first on mobile
   */
 
-  .project-image-container {
-    order: -1;
-
-    min-height: 190px;
-
-    padding: 12px;
-  }
-
   .project-image-container img {
     max-height: 190px;
   }
@@ -781,6 +1271,112 @@
 
   .project-technologies {
     margin-top: 20px;
+  }
+}
+
+/* =====================================================
+   MOBILE PROJECT IMAGE
+===================================================== */
+
+@media (max-width: 700px) {
+  .project-image-container {
+    width: 306px;
+    height: 151px;
+
+    min-height: 151px;
+
+    padding: 0;
+
+    flex-shrink: 0;
+  }
+
+  .project-image-button {
+    width: 306px;
+    height: 151px;
+  }
+
+  .project-view-circle {
+    width: 62px;
+    height: 62px;
+
+    font-size: 0.6rem;
+  }
+
+  .project-image-label {
+    right: 8px;
+    bottom: 7px;
+
+    font-size: 0.55rem;
+  }
+
+  .project-slide-indicators {
+    bottom: 7px;
+  }
+
+  /* ==========================
+     MODAL MOBILE
+  ========================== */
+
+  .project-image-modal {
+    padding: 20px;
+  }
+
+  .project-modal-content {
+    width: 100%;
+
+    max-width: 100%;
+
+    max-height: 85vh;
+  }
+
+  .project-modal-image {
+    max-width: 90vw;
+
+    max-height: 70vh;
+  }
+
+  .project-modal-prev,
+  .project-modal-next {
+    width: 40px;
+    height: 40px;
+
+    font-size: 1.8rem;
+  }
+
+  .project-modal-prev {
+    left: 5px;
+  }
+
+  .project-modal-next {
+    right: 5px;
+  }
+
+  .project-modal-close {
+    top: -48px;
+
+    right: 0;
+
+    width: 36px;
+    height: 36px;
+
+    font-size: 1.5rem;
+  }
+
+  .project-modal-info {
+    bottom: -50px;
+
+    gap: 7px;
+
+    padding: 7px 10px;
+  }
+
+  .project-modal-title {
+    font-size: 0.65rem;
+  }
+
+  .project-modal-label,
+  .project-modal-counter {
+    font-size: 0.58rem;
   }
 }
 
@@ -816,5 +1412,29 @@
     padding-left: 16px;
 
     font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .project-image-container {
+    width: 306px;
+    height: 151px;
+
+    max-width: 100%;
+  }
+
+  .project-image-button {
+    width: 306px;
+    max-width: 100%;
+
+    height: 151px;
+  }
+
+  .project-modal-prev {
+    left: -2px;
+  }
+
+  .project-modal-next {
+    right: -2px;
   }
 }

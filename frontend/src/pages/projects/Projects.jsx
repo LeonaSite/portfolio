@@ -1,14 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import BlurText from "../../components/BlurText/BlurText";
 import "./Projects.css";
 
-// Project images
-import osmsImage from "../../assets/project-sample/OSMS.png";
-import designXcelImage from "../../assets/project-sample/designXcel.png";
-import airsoftTechImage from "../../assets/project-sample/airsoftTech.png";
-import biteBytesImage from "../../assets/project-sample/biteBytes.jpg";
+// =====================================================
+// PROJECT IMAGES
+// =====================================================
+
+// OSMS
+import osmsDashboard from "../../assets/project-sample/osms/osms-dashboard.jpg";
+import osmsRecord from "../../assets/project-sample/osms/osms-record.jpg";
+import osmsRequest from "../../assets/project-sample/osms/osms-request.jpg";
+import osmsStock from "../../assets/project-sample/osms/osms-stock.jpg";
+
+// DesignXcel
+import designXcelDashboard from "../../assets/project-sample/designXcel/designXcel-dashboard.jpg";
+import designXcelHomepage from "../../assets/project-sample/designXcel/designXcel-homepage.jpg";
+import designXcelProduct from "../../assets/project-sample/designXcel/designXcel-product.jpg";
+import designXcelReports from "../../assets/project-sample/designXcel/designXcel-reports.jpg";
+import designXcelSales from "../../assets/project-sample/designXcel/designXcel-sales.jpg";
+
+// AirsoftTech
+import airsoftTechDashboard from "../../assets/project-sample/airsoftTech/airsoftTech-dashboard.jpg";
+import airsoftTechHome from "../../assets/project-sample/airsoftTech/airsoftTech-home.jpg";
+import airsoftTechModels from "../../assets/project-sample/airsoftTech/airsoftTech-models.png";
+import airsoftTechOrder from "../../assets/project-sample/airsoftTech/airsoftTech-order.jpg";
+import airsoftTechShop from "../../assets/project-sample/airsoftTech/airsoftTech-shop.jpg";
+
+// Bite & Bytes
+import biteBytesChecking from "../../assets/project-sample/biteBytes/biteBytes-check.jpg";
+import biteBytesLogin from "../../assets/project-sample/biteBytes/biteBytes-login.jpg";
+import biteBytesSelection from "../../assets/project-sample/biteBytes/biteBytes-selection.jpg";
 
 // Technology logos
 import reactLogo from "../../assets/logo/reactjs-logo.webp";
@@ -25,7 +48,6 @@ export default function Project() {
       offset: 100,
     });
 
-    // Refresh AOS when the page is loaded
     AOS.refresh();
   }, []);
 
@@ -33,8 +55,26 @@ export default function Project() {
     {
       title: "OSMS: Online Supply Management System",
       year: "2026",
-      image: osmsImage,
-      imageLabel: "Admin Dashboard Interface",
+
+      images: [
+        {
+          src: osmsDashboard,
+          label: "Admin Dashboard Interface",
+        },
+        {
+          src: osmsRecord,
+          label: "Admin Record Interface",
+        },
+        {
+          src: osmsRequest,
+          label: "Supply Request Interface",
+        },
+        {
+          src: osmsStock,
+          label: "Stock Management Interface",
+        },
+      ],
+
       side: "left",
 
       description: [
@@ -62,8 +102,30 @@ export default function Project() {
     {
       title: "DesignXcel",
       year: "2026",
-      image: designXcelImage,
-      imageLabel: "Admin Sales Record",
+
+      images: [
+        {
+          src: designXcelDashboard,
+          label: "Admin Dashboard",
+        },
+        {
+          src: designXcelHomepage,
+          label: "Homepage",
+        },
+        {
+          src: designXcelProduct,
+          label: "Product Interface",
+        },
+        {
+          src: designXcelReports,
+          label: "Sales Reports",
+        },
+        {
+          src: designXcelSales,
+          label: "Admin Sales Record",
+        },
+      ],
+
       side: "right",
 
       description: [
@@ -91,8 +153,30 @@ export default function Project() {
     {
       title: "AirsoftTech",
       year: "2025",
-      image: airsoftTechImage,
-      imageLabel: "3D View of Product",
+
+      images: [
+        {
+          src: airsoftTechDashboard,
+          label: "Admin Dashboard",
+        },
+        {
+          src: airsoftTechHome,
+          label: "Homepage",
+        },
+        {
+          src: airsoftTechModels,
+          label: "3D Product Models",
+        },
+        {
+          src: airsoftTechOrder,
+          label: "Order Interface",
+        },
+        {
+          src: airsoftTechShop,
+          label: "Product Shop",
+        },
+      ],
+
       side: "left",
 
       description: [
@@ -120,8 +204,22 @@ export default function Project() {
     {
       title: "Bite & Bytes: POS System",
       year: "2024",
-      image: biteBytesImage,
-      imageLabel: "Food Selection",
+
+      images: [
+        {
+          src: biteBytesSelection,
+          label: "Food Selection",
+        },
+        {
+          src: biteBytesLogin,
+          label: "Login Interface",
+        },
+        {
+          src: biteBytesChecking,
+          label: "Order Checking",
+        },
+      ],
+
       side: "right",
 
       description: [
@@ -146,7 +244,10 @@ export default function Project() {
   return (
     <div className="project-page">
       <section className="project-section">
-        {/* PAGE TITLE */}
+        {/* =====================================================
+            PAGE TITLE
+        ===================================================== */}
+
         <div className="project-header">
           <BlurText
             text="PROJECTS"
@@ -164,9 +265,11 @@ export default function Project() {
           </p>
         </div>
 
-        {/* TIMELINE */}
+        {/* =====================================================
+            TIMELINE
+        ===================================================== */}
+
         <div className="project-timeline">
-          {/* Animated vertical line */}
           <div className="timeline-line">
             <div className="timeline-line-progress"></div>
           </div>
@@ -176,7 +279,8 @@ export default function Project() {
               className={`project-timeline-item ${project.side}`}
               key={project.title}
             >
-              {/* Timeline node - appears FIRST */}
+              {/* TIMELINE NODE */}
+
               <div
                 className="timeline-node"
                 data-aos="fade-right"
@@ -184,14 +288,14 @@ export default function Project() {
                 data-aos-duration="700"
               ></div>
 
-              {/* PROJECT CARD - appears AFTER node */}
+              {/* PROJECT CARD */}
+
               <div
                 className={`project-card ${project.side}`}
                 data-aos="fade-right"
                 data-aos-delay={index * 150 + 450}
                 data-aos-duration="900"
               >
-                {/* LEFT SIDE CONTENT */}
                 {project.side === "left" && (
                   <>
                     <ProjectInformation project={project} />
@@ -200,7 +304,6 @@ export default function Project() {
                   </>
                 )}
 
-                {/* RIGHT SIDE CONTENT */}
                 {project.side === "right" && (
                   <>
                     <ProjectImage project={project} />
@@ -235,7 +338,6 @@ function ProjectInformation({ project }) {
         ))}
       </ul>
 
-      {/* TECHNOLOGY PILLS */}
       <div className="project-technologies">
         {project.technologies.map((technology) => (
           <div
@@ -253,15 +355,202 @@ function ProjectInformation({ project }) {
 }
 
 /* =====================================================
-   PROJECT IMAGE
+   PROJECT IMAGE SLIDESHOW
 ===================================================== */
 
 function ProjectImage({ project }) {
-  return (
-    <div className="project-image-container">
-      <img src={project.image} alt={project.title} />
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-      <span className="project-image-label">{project.imageLabel}</span>
-    </div>
+  const images = project.images;
+
+  /*
+    Automatic slideshow
+  */
+
+  useEffect(() => {
+    if (images.length <= 1 || isModalOpen) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((previous) => (previous + 1) % images.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [images.length, isModalOpen]);
+
+  /*
+    Close modal with ESC
+  */
+
+  useEffect(() => {
+    if (!isModalOpen) return;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setIsModalOpen(false);
+      }
+
+      if (event.key === "ArrowRight") {
+        nextImage();
+      }
+
+      if (event.key === "ArrowLeft") {
+        previousImage();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+
+      document.body.style.overflow = "";
+    };
+  }, [isModalOpen]);
+
+  /*
+    Next image
+  */
+
+  const nextImage = () => {
+    setCurrentIndex((previous) => (previous + 1) % images.length);
+  };
+
+  /*
+    Previous image
+  */
+
+  const previousImage = () => {
+    setCurrentIndex(
+      (previous) => (previous - 1 + images.length) % images.length,
+    );
+  };
+
+  const currentImage = images[currentIndex];
+
+  return (
+    <>
+      {/* =====================================================
+          IMAGE SLIDESHOW
+      ===================================================== */}
+
+      <div className="project-image-container">
+        <button
+          type="button"
+          className="project-image-button"
+          onClick={() => setIsModalOpen(true)}
+          aria-label={`View ${project.title} images`}
+        >
+          {/* Image */}
+
+          {images.map((image, index) => (
+            <img
+              key={image.src}
+              src={image.src}
+              alt={image.label}
+              className={`project-slideshow-image ${
+                index === currentIndex ? "active" : ""
+              }`}
+            />
+          ))}
+
+          {/* Hover overlay */}
+
+          <span className="project-view-overlay">
+            <span className="project-view-circle">VIEW</span>
+          </span>
+        </button>
+
+        {/* Image label */}
+
+        <span className="project-image-label">{currentImage.label}</span>
+
+        {/* Slideshow indicators */}
+
+        {images.length > 1 && (
+          <div className="project-slide-indicators">
+            {images.map((_, index) => (
+              <span
+                key={index}
+                className={`project-slide-dot ${
+                  index === currentIndex ? "active" : ""
+                }`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* =====================================================
+          IMAGE MODAL
+      ===================================================== */}
+
+      {isModalOpen && (
+        <div
+          className="project-image-modal"
+          onClick={() => setIsModalOpen(false)}
+        >
+          <div
+            className="project-modal-content"
+            onClick={(event) => event.stopPropagation()}
+          >
+            {/* Close */}
+
+            <button
+              type="button"
+              className="project-modal-close"
+              onClick={() => setIsModalOpen(false)}
+              aria-label="Close image viewer"
+            >
+              ×
+            </button>
+
+            {/* Previous */}
+
+            <button
+              type="button"
+              className="project-modal-prev"
+              onClick={previousImage}
+              aria-label="Previous image"
+            >
+              ‹
+            </button>
+
+            {/* Main image */}
+
+            <img
+              src={currentImage.src}
+              alt={currentImage.label}
+              className="project-modal-image"
+            />
+
+            {/* Next */}
+
+            <button
+              type="button"
+              className="project-modal-next"
+              onClick={nextImage}
+              aria-label="Next image"
+            >
+              ›
+            </button>
+
+            {/* Modal information */}
+
+            <div className="project-modal-info">
+              <span className="project-modal-title">{project.title}</span>
+
+              <span className="project-modal-label">{currentImage.label}</span>
+
+              <span className="project-modal-counter">
+                {currentIndex + 1} / {images.length}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
