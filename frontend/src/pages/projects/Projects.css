@@ -342,6 +342,7 @@
   justify-content: center;
 
   min-width: 0;
+  cursor: pointer;
 }
 
 /* =====================================================
@@ -1163,6 +1164,51 @@
   color: rgba(255, 255, 255, 0.4);
 
   font-size: 0.65rem;
+}
+
+/* =====================================================
+   PROJECT LINK
+===================================================== */
+.project-view-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 24px;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    gap 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.project-view-link:hover {
+  gap: 12px;
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.project-view-icon {
+  width: 18px;
+  height: 18px;
+
+  transition: transform 0.25s ease;
+}
+
+.project-view-link:hover .project-view-icon {
+  transform: translate(2px, -2px);
 }
 
 /* =====================================================

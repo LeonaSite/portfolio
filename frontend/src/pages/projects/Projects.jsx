@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import BlurText from "../../components/BlurText/BlurText";
 import "./Projects.css";
+
+import { RiArrowRightUpLine } from "react-icons/ri";
 
 // =====================================================
 // PROJECT IMAGES
@@ -39,8 +42,10 @@ import reactLogo from "../../assets/logo/reactjs-logo.webp";
 import nodeLogo from "../../assets/logo/nodejs-logo.webp";
 import mySqlLogo from "../../assets/logo/mySQL-logo.webp";
 import msSqlLogo from "../../assets/logo/msSQL-logo.webp";
+import azureLogo from "../../assets/logo/azure-logo.webp";
 
 export default function Project() {
+  const navigate = useNavigate();
   useEffect(() => {
     AOS.init({
       duration: 900,
@@ -55,6 +60,7 @@ export default function Project() {
   const projects = [
     {
       title: "OSMS: Online Supply Management System",
+      slug: "OSMS",
       year: "2026",
 
       images: [
@@ -102,6 +108,7 @@ export default function Project() {
 
     {
       title: "DesignXcel",
+      slug: "DesignXcel",
       year: "2026",
 
       images: [
@@ -148,11 +155,16 @@ export default function Project() {
           name: "MS SQL",
           logo: msSqlLogo,
         },
+        {
+          name: "Azure",
+          logo: azureLogo,
+        },
       ],
     },
 
     {
       title: "AirsoftTech",
+      slug: "AirsoftTech",
       year: "2025",
 
       images: [
@@ -199,11 +211,16 @@ export default function Project() {
           name: "MS SQL",
           logo: msSqlLogo,
         },
+        {
+          name: "Azure",
+          logo: azureLogo,
+        },
       ],
     },
 
     {
       title: "Bite & Bytes: POS System",
+      slug: "BiteBytes",
       year: "2024",
 
       images: [
@@ -299,7 +316,7 @@ export default function Project() {
               >
                 {project.side === "left" && (
                   <>
-                    <ProjectInformation project={project} />
+                    <ProjectInformation project={project} navigate={navigate} />
 
                     <ProjectImage project={project} />
                   </>
@@ -309,7 +326,7 @@ export default function Project() {
                   <>
                     <ProjectImage project={project} />
 
-                    <ProjectInformation project={project} />
+                    <ProjectInformation project={project} navigate={navigate} />
                   </>
                 )}
               </div>
@@ -325,11 +342,15 @@ export default function Project() {
    PROJECT INFORMATION
 ===================================================== */
 
-function ProjectInformation({ project }) {
+function ProjectInformation({ project, navigate }) {
   return (
-    <div className="project-information">
+    <div
+      className="project-information"
+      onClick={() => navigate(`/projects/${project.slug}`)}
+    >
       <div className="project-title-row">
         <h2>{project.title}</h2>
+
         <span>{project.year}</span>
       </div>
 
@@ -351,6 +372,17 @@ function ProjectInformation({ project }) {
           </div>
         ))}
       </div>
+
+      {/* VIEW PROJECT */}
+      <button
+        type="button"
+        className="project-view-link"
+        onClick={() => navigate(`/projects/${project.slug}`)}
+      >
+        <span>Click to view</span>
+
+        <RiArrowRightUpLine className="project-view-icon" />
+      </button>
     </div>
   );
 }
